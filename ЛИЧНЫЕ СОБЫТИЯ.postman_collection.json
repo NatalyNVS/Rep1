@@ -1,0 +1,1436 @@
+{
+	"info": {
+		"_postman_id": "03932571-2bb1-4a79-8bf9-411d867be560",
+		"name": "ЛИЧНЫЕ СОБЫТИЯ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26939093",
+		"_collection_link": "https://www.postman.com/universal-spaceship-492753/workspace/2/collection/26939093-03932571-2bb1-4a79-8bf9-411d867be560?action=share&creator=26939093&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Создание ЛС",
+			"item": [
+				{
+					"name": "Получение расписания",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"from\": \"2023-06-10T00:00:00+03:00\",\r\n    \"till\": \"2023-06-10T23:59:59+03:00\",\r\n    \"onlyTypes\": [\r\n        \"slot\",\r\n        \"event\"\r\n    ],\r\n    \"statuses\": [\r\n        \"without_status\"\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "https://api-teachers.skyeng.ru/v2/schedule/events",
+							"protocol": "https",
+							"host": [
+								"api-teachers",
+								"skyeng",
+								"ru"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Создание ЛС в прошлом на Кириллице",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"eventId1\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"\r",
+									"pm.collectionVariables.set(key, value);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#EBFDF2\",\r\n    \"color\": \"#43B658\",\r\n    \"description\": \"такое себе описание\",\r\n    \"title\": \"ТОТ САМЫЙ УРОК НА КИРИЛЛИЦЕ\",\r\n    \"startAt\": \"2023-06-02T12:00:00+03:00\",\r\n    \"endAt\": \"2023-06-02T13:30:00+03:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/createPersonal?id=eventId1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"createPersonal"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "eventId1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Создание ЛС максимальной длительностью фиолетового цвета",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"eventId2\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"\r",
+									"pm.collectionVariables.set(key, value);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#F9EBFF\",\r\n    \"color\": \"#D478F1\",\r\n    \"description\": \"такое себе описание\",\r\n    \"title\": \"очень длинный и фиолетовый\",\r\n    \"startAt\": \"2023-06-02T00:00:00+03:00\",\r\n    \"endAt\": \"2023-06-02T23:50:00+03:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/createPersonal?id=eventId2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"createPersonal"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "eventId2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Создание ЛС в будущем на латинице",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"eventId3\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"\r",
+									"pm.collectionVariables.set(key, value);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#EBFDF2\",\r\n    \"color\": \"#43B658\",\r\n    \"description\": \"такое себе описание\",\r\n    \"title\": \"wooo hooo Latina lesson\",\r\n    \"startAt\": \"2023-06-10T12:00:00+03:00\",\r\n    \"endAt\": \"2023-06-10T13:30:00+03:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/createPersonal?id=eventId3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"createPersonal"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "eventId3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Создание ЛС минимальной длительностью желтого цвета",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"eventId4\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"\r",
+									"pm.collectionVariables.set(key, value);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"такое себе описание\",\r\n    \"title\": \"очень короткий и желтый\",\r\n    \"startAt\": \"2023-06-03T10:00:00+03:00\",\r\n    \"endAt\": \"2023-06-03T10:10:00+03:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/createPersonal?id=eventId4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"createPersonal"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "eventId4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Создание ЛС с пустым полем \"Описание\"",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"eventId5\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"\r",
+									"pm.collectionVariables.set(key, value);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#F9EBFF\",\r\n    \"color\": \"#D478F1\",\r\n       \"title\": \"без описания\",\r\n    \"description\": null,\r\n    \"startAt\": \"2023-06-03T10:00:00+03:00\",\r\n    \"endAt\": \"2023-06-03T10:40:00+03:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/createPersonal?id=eventId5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"createPersonal"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "eventId5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Создание два ЛС на одно время",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"eventId6\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"\r",
+									"pm.collectionVariables.set(key, value);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#F9EBFF\",\r\n    \"color\": \"#D478F1\",\r\n       \"title\": \"без описания\",\r\n    \"description\": null,\r\n    \"startAt\": \"2023-06-03T10:00:00+03:00\",\r\n    \"endAt\": \"2023-06-03T10:40:00+03:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/createPersonal?id=eventId6",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"createPersonal"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "eventId6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Создание ЛС и Урока на одно время",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"eventId7\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"\r",
+									"pm.collectionVariables.set(key, value);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#F9EBFF\",\r\n    \"color\": \"#D478F1\",\r\n       \"title\": \"вместе с уроком\",\r\n    \"description\": null,\r\n    \"startAt\": \"2023-06-02T10:00:00+03:00\",\r\n    \"endAt\": \"2023-06-02T10:50:00+03:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/createPersonal?id=eventId7",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"createPersonal"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "eventId7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление ЛС Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"id\": {{eventId1}},\r\n   \"startAt\": \"2023-06-02T12:00:00+03:00\",\r\n    \"endAt\": \"2023-06-02T13:30:00+03:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/removePersonal",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"removePersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление ЛС Copy 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"id\": {{eventId2}},\r\n   \"startAt\": \"2023-06-02T00:00:00+03:00\",\r\n    \"endAt\": \"2023-06-02T23:50:00+03:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/removePersonal",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"removePersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление ЛС Copy 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"id\": {{eventId3}},\r\n    \"startAt\": \"2023-06-10T12:00:00+03:00\",\r\n    \"endAt\": \"2023-06-10T13:30:00+03:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/removePersonal",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"removePersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление ЛС Copy 4",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"id\": {{eventId4}},\r\n    \"startAt\": \"2023-06-03T10:00:00+03:00\",\r\n    \"endAt\": \"2023-06-03T10:10:00+03:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/removePersonal",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"removePersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление ЛС Copy 5",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"id\": {{eventId5}},\r\n   \"startAt\": \"2023-06-03T10:00:00+03:00\",\r\n    \"endAt\": \"2023-06-03T10:40:00+03:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/removePersonal",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"removePersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление ЛС Copy 6",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"id\": {{eventId6}},\r\n     \"startAt\": \"2023-06-03T10:00:00+03:00\",\r\n    \"endAt\": \"2023-06-03T10:40:00+03:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/removePersonal",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"removePersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление ЛС Copy 7",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n     \"id\": {{eventId7}},\r\n     \"startAt\": \"2023-06-02T10:00:00+03:00\",\r\n    \"endAt\": \"2023-06-02T10:50:00+03:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/removePersonal",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"removePersonal"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Редактирование ЛС",
+			"item": [
+				{
+					"name": "Создание ЛС",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"eventId\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"\r",
+									"pm.collectionVariables.set(key, value);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#EBFDF2\",\r\n    \"color\": \"#43B658\",\r\n    \"description\": \"такое себе описание\",\r\n    \"title\": \"wooo hooo Latina lesson\",\r\n    \"startAt\": \"2023-06-10T12:00:00+03:00\",\r\n    \"endAt\": \"2023-06-10T13:30:00+03:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/createPersonal",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"createPersonal"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "eventId",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Изменить название и цвет на фиолетовый",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"eventId\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"\r",
+									"pm.collectionVariables.set(key, value);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							},
+							{
+								"key": "id",
+								"value": "id={{eventId}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"startAt\":  \"2023-06-10T12:00:00+03:00\",\r\n    \"eventId\": \"S82119926-20230610-090000\",\r\n    \"endAt\": \"2023-06-10T13:30:00+03:00\",\r\n    \"title\": \"НОВОЕ wooo hooo Latina lesson\",\r\n    \"description\": \"такое себе описание\",\r\n    \"color\": \"#D478F1\",\r\n    \"id\": {{eventId}},\r\n    \"backgroundColor\": \"#F9EBFF\",\r\n    \"oldStartAt\":\"2023-06-10T09:00:00+00:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/updatePersonal?id=eventId",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"updatePersonal"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "eventId"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Изменить дату и описание",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"eventId\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"\r",
+									"pm.collectionVariables.set(key, value);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"startAt\":  \"2023-06-09T12:00:00+03:00\",\r\n    \"eventId\": \"S82102374-20230610-090000\",\r\n    \"endAt\": \"2023-06-09T13:30:00+03:00\",\r\n    \"title\": \"НОВОЕ wooo hooo Latina lesson\",\r\n    \"description\": \"НОВОЕ такое себе описание\",\r\n    \"color\": \"#D478F1\",\r\n    \"backgroundColor\": \"#F9EBFF\",\r\n    \"id\": {{eventId}},\r\n    \"oldStartAt\":\"2023-06-10T09:00:00+00:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/updatePersonal",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"updatePersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Изменить время окончания ЛС",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"eventId\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"\r",
+									"pm.collectionVariables.set(key, value);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"startAt\":  \"2023-06-09T12:00:00+03:00\",\r\n    \"eventId\": \"S82102374-20230610-090000\",\r\n    \"endAt\": \"2023-06-09T12:20:00+03:00\",\r\n    \"title\": \"НОВОЕ wooo hooo Latina lesson\",\r\n    \"description\": \"НОВОЕ такое себе описание\",\r\n    \"color\": \"#D478F1\",\r\n    \"backgroundColor\": \"#F9EBFF\",\r\n    \"id\": {{eventId}},\r\n    \"oldStartAt\":\"2023-06-09T12:00:00+03:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/updatePersonal",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"updatePersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление ЛС",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": {{eventId}},\r\n    \"startAt\": \"2023-06-09T12:00:00+03:00\",\r\n    \"oldStartAt\":\"2023-06-09T12:00:00+03:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/removePersonal",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"removePersonal"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Невалидные Проверки",
+			"item": [
+				{
+					"name": "Получение расписания",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"from\": \"2023-06-10T00:00:00+03:00\",\r\n    \"till\": \"2023-06-10T23:59:59+03:00\",\r\n    \"onlyTypes\": [\r\n        \"slot\",\r\n        \"event\"\r\n    ],\r\n    \"statuses\": [\r\n        \"without_status\"\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/events",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Создание ЛС продолжительностью более суток",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"eventIdNegative1\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"\r",
+									"pm.collectionVariables.set(key, value);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							},
+							{
+								"key": "id",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#EBFDF2\",\r\n    \"color\": \"#43B658\",\r\n    \"description\": \"урок, длнною в жизнь\",\r\n    \"title\": \"wooo hooo Latina lesson\",\r\n    \"startAt\": \"2023-06-10T12:00:00+03:00\",\r\n    \"endAt\": \"2023-06-12T13:30:00+03:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/createPersonal?id=eventIdNegative1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"createPersonal"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "eventIdNegative1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление ЛС",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": {{eventIdNegative1}},\r\n    \"startAt\": \"2023-06-10T12:00:00+03:00\",\r\n    \"oldStartAt\":\"2023-06-09T12:00:00+03:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/removePersonal",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"removePersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Создание ЛС красного цвета продолжительностью 1 мин",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"eventIdNegative2\"\r",
+									"var value = pm.response.json().data.payload.id\r",
+									"\r",
+									"pm.collectionVariables.set(key, value);\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#FF0000\",\r\n    \"color\": \"#FF0000\",\r\n    \"description\": \"такое себе описание\",\r\n    \"title\": \"очень крассный и короткий\",\r\n    \"startAt\": \"2023-06-02T00:00:00+03:00\",\r\n    \"endAt\": \"2023-06-02T00:01:00+03:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/createPersonal?id=eventIdNegative2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"createPersonal"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "eventIdNegative2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление ЛС",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Cookie",
+								"value": "token_global={{token_global}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": {{eventIdNegative2}},\r\n    \"startAt\": \"2023-06-02T00:00:00+03:00\",\r\n    \"endAt\": \"2023-06-02T00:01:00+03:00\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/v2/schedule/removePersonal",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"v2",
+								"schedule",
+								"removePersonal"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token_global",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "url",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "eventId1",
+			"value": ""
+		},
+		{
+			"key": "startAt1",
+			"value": ""
+		},
+		{
+			"key": "eventId2",
+			"value": ""
+		},
+		{
+			"key": "eventId3",
+			"value": ""
+		},
+		{
+			"key": "eventId4",
+			"value": ""
+		},
+		{
+			"key": "eventId5",
+			"value": ""
+		},
+		{
+			"key": "eventId6",
+			"value": ""
+		},
+		{
+			"key": "eventId7",
+			"value": ""
+		},
+		{
+			"key": "eventId",
+			"value": ""
+		},
+		{
+			"key": "eventIdNegative1",
+			"value": ""
+		},
+		{
+			"key": "eventIdNegative2",
+			"value": ""
+		}
+	]
+}
